@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
+                cd jenkins_test_app
                 pip install pytest
                 '''
             }
@@ -20,6 +21,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
+                cd jenkins_test_app
                 pytest .
                 '''
             }
@@ -28,6 +30,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
+                cd jenkins_test_app
                 python3 main.py
                 '''
             }

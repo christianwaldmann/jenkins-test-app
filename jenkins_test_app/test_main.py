@@ -1,4 +1,4 @@
-from main import message
+from jenkins_test_app.main import message
 
 
 def test_message():
