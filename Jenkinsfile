@@ -22,7 +22,7 @@ pipeline {
                 echo "Testing.."
                 sh '''
                 cd jenkins_test_app
-                pytest .
+                python3 -m pytest .
                 '''
             }
         }
