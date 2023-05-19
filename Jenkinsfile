@@ -32,7 +32,6 @@ pipeline {
         }
         stage('Deliver') {
               steps {
-                sh 'jfrog rt upload --url http://192.168.54.61:8081/ --access-token ${ARTIFACTORY_ACCESS_TOKEN} jenkins_test_app/main.py jenkins_test_app/'
                 sh 'curl -v -X PUT --access-token ${ARTIFACTORY_ACCESS_TOKEN} --upload-file jenkins_test_app/main.py http://localhost:8081/artifactory/system-monitoring/main.py"'
             }
         }
