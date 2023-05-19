@@ -7,6 +7,10 @@ pipeline {
     triggers {
         pollSCM '* * * * *'
     }
+    environment {
+        CI = true
+        ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
+    }
     stages {
         stage('Build') {
             steps {
@@ -27,12 +31,14 @@ pipeline {
             }
         }
         stage('Deliver') {
-            steps {
-                echo 'Deliver....'
-                sh '''
-                cd jenkins_test_app
-                python3 main.py
-                '''
+            agent {
+                docker {
+                  image 'releases-docker.jfrog.io/jfrog/jfrog-cli-v2:2.2.0' 
+                  reuseNode true
+                }
+            }
+              steps {
+                sh 'jfrog rt upload --url http://192.168.54.61:8081/artifactory/ --access-token ${ARTIFACTORY_ACCESS_TOKEN} jenkins_test_app/main.py jenkins_test_app/'
             }
         }
     }
