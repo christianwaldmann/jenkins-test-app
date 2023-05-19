@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Deliver') {
               steps {
-                sh 'curl -v -X PUT --access-token ${ARTIFACTORY_ACCESS_TOKEN} --upload-file jenkins_test_app/main.py http://localhost:8081/artifactory/system-monitoring/main.py'
+                sh 'curl -v -X PUT -u admin:${ARTIFACTORY_ACCESS_TOKEN} --upload-file jenkins_test_app/main.py http://localhost:8081/artifactory/system-monitoring/main.py'
             }
         }
     }
