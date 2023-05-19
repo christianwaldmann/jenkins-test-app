@@ -33,7 +33,7 @@ pipeline {
         stage('Deliver') {
             agent {
                 docker {
-                  image 'releases-docker.jfrog.io/jfrog/jfrog-cli-v2:2.2.0' 
+                  image 'meisterplan/jfrog-cli' 
                   reuseNode true
                 }
             }
